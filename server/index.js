@@ -10,9 +10,18 @@ const PORT = 8000;
 const connections = {};
 const users = {};
 
+const broadcast = () => {
+  const payload = JSON.stringify(users);
+  Object.values(connections).forEach((conn) => conn.send(payload));
+};
 const handleMessage = (uuid, bytes) => {
-  users[uuid].state = JSON.parse(bytes.toString());
-  console.log(`Received message from ${uuid}:`, users[uuid].state);
+  const user = users[uuid];
+  user.state = JSON.parse(bytes.toString());
+  console.log(
+    `Received message from ${user.username} (${uuid}):`,
+    users[uuid].state
+  );
+  broadcast();
 };
 
 /**
