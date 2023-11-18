@@ -24,6 +24,16 @@ const handleMessage = (uuid, bytes) => {
   broadcast();
 };
 
+const handleClose = (uuid) => {
+  const username = users[uuid].username;
+  delete connections[uuid];
+  delete users[uuid];
+
+  broadcast();
+
+  console.log(`User ${username} (${uuid}) disconnected`);
+};
+
 /**
  * Connect to the server using the following URL:
  * ws://localhost:8000?username=Alex
@@ -41,6 +51,7 @@ wsServer.on('connection', (conn, req) => {
   };
 
   conn.on('message', (message) => handleMessage(uuid, message));
+  conn.on('close', () => handleClose(uuid));
 });
 
 /**
