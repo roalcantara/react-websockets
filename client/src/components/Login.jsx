@@ -1,8 +1,7 @@
 import { useState } from 'react';
 
 export function Login({ onSubmit }) {
-  const { username, setUsername } = useState('');
-
+  const [username, setUsername] = useState('');
   return (
     <>
       <h1>Welcome</h1>
