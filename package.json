@@ -4,7 +4,6 @@
   "description": "React WebSocket Workspace",
   "main": "index.js",
   "scripts": {
-    "install": "npm install && npm install --workspaces",
     "start": "concurrently \"npm run dev --workspace=apps/client\" \"npm run dev --workspace=apps/server\""
   },
   "workspaces": [
